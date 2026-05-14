@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apresentação · Mapa R.A.I.Z.</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --preto: #1A1208; --ouro: #C9A96E; --creme: #F5ECD7;
+    --terra: #3D2B0E; --ouro-claro: #DFC28E;
+  }
+  body {
+    background: #0e0a04; font-family: 'DM Sans', sans-serif;
+    font-weight: 300; color: var(--creme);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    min-height: 100vh; padding: 20px;
+  }
+  .deck {
+    width: 100%; max-width: 960px;
+  }
+  /* SLIDE */
+  .slide {
+    display: none;
+    background: var(--preto);
+    border: 1px solid rgba(201,169,110,0.15);
+    border-radius: 4px;
+    min-height: 540px;
+    padding: 60px 64px;
+    position: relative;
+    overflow: hidden;
+    animation: fadeIn 0.4s ease;
+  }
+  .slide.active { display: flex; flex-direction: column; justify-content: center; }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+  .slide-num {
+    position: absolute; top: 24px; right: 28px;
+    font-size: 10px; font-weight: 400; color: rgba(201,169,110,0.3);
+    letter-spacing: 2px;
+  }
+  .slide-tag {
+    font-size: 9px; font-weight: 500; color: var(--ouro);
+    letter-spacing: 4px; text-transform: uppercase; margin-bottom: 20px;
+  }
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300; font-size: 52px; color: var(--creme);
+    line-height: 1.05; margin-bottom: 20px;
+  }
+  h1 em { font-style: italic; color: var(--ouro); }
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300; font-size: 38px; color: var(--creme);
+    line-height: 1.1; margin-bottom: 20px;
+  }
+  h2 em { font-style: italic; color: var(--ouro); }
+  .sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-size: 20px;
+    color: rgba(245,236,215,0.65); line-height: 1.5;
+    margin-bottom: 24px;
+  }
+  .body { font-size: 14px; font-weight: 300; color: rgba(245,236,215,0.75); line-height: 1.8; margin-bottom: 14px; }
+  .quote {
+    border-left: 2px solid var(--ouro); padding-left: 24px;
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 22px; color: var(--creme); line-height: 1.4; margin: 20px 0;
+  }
+
+  /* GRID ENTREGAS */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 24px; }
+  .grid-4 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
+  .card-e {
+    background: rgba(61,43,14,0.3); border: 1px solid rgba(201,169,110,0.15);
+    border-radius: 4px; padding: 18px 20px;
+  }
+  .card-e-num {
+    font-family: 'Cormorant Garamond', serif; font-weight: 300;
+    font-size: 28px; color: var(--ouro); line-height: 1; margin-bottom: 6px;
+  }
+  .card-e-title { font-size: 11px; font-weight: 500; color: var(--ouro); letter-spacing: 0.5px; margin-bottom: 4px; }
+  .card-e-desc { font-size: 11px; font-weight: 300; color: rgba(245,236,215,0.65); line-height: 1.5; }
+
+  /* DOR LISTA */
+  .dor-list { margin-top: 20px; }
+  .dor-i {
+    display: flex; gap: 12px; align-items: flex-start;
+    padding: 14px 0; border-bottom: 1px solid rgba(201,169,110,0.08);
+  }
+  .dor-i:last-child { border-bottom: none; }
+  .dor-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--ouro); margin-top: 8px; flex-shrink: 0; }
+  .dor-text { font-size: 14px; font-weight: 300; color: rgba(245,236,215,0.8); line-height: 1.6; }
+  .dor-nota { font-size: 11px; color: var(--ouro); margin-top: 2px; }
+
+  /* PARA QUEM */
+  .pq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
+  .pq-c { border: 1px solid rgba(201,169,110,0.2); border-radius: 4px; padding: 20px; }
+  .pq-c.s { border-color: rgba(201,169,110,0.4); }
+  .pq-ct { font-size: 9px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--ouro); margin-bottom: 12px; }
+  .pq-ct.n { color: rgba(201,169,110,0.35); }
+  .pq-i { font-size: 12px; font-weight: 300; color: var(--creme); line-height: 1.5; padding: 5px 0; border-bottom: 1px solid rgba(201,169,110,0.07); display: flex; gap: 8px; }
+  .pq-i:last-child { border-bottom: none; }
+  .pi-dot { color: var(--ouro); flex-shrink: 0; }
+
+  /* PREÇO SLIDE */
+  .preco-center { text-align: center; }
+  .preco-big {
+    font-family: 'Cormorant Garamond', serif; font-weight: 300;
+    font-size: 80px; color: var(--creme); line-height: 1; margin: 16px 0 8px;
+  }
+  .preco-tag { font-size: 10px; font-weight: 500; color: var(--ouro); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 24px; }
+  .preco-abate {
+    display: inline-block; border: 1px solid rgba(201,169,110,0.3);
+    border-radius: 40px; padding: 8px 20px;
+    font-size: 12px; font-weight: 300; color: var(--ouro); margin-bottom: 28px;
+  }
+  .cta-btn {
+    display: inline-block; background: var(--ouro); color: var(--preto);
+    font-weight: 500; font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    text-decoration: none; padding: 14px 36px; border-radius: 2px;
+    cursor: pointer; border: none;
+  }
+
+  /* STATS ROW */
+  .stats-row { display: flex; gap: 40px; margin-top: 28px; flex-wrap: wrap; }
+  .stat { }
+  .stat-n { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 40px; color: var(--ouro); line-height: 1; }
+  .stat-l { font-size: 10px; font-weight: 300; color: rgba(245,236,215,0.4); letter-spacing: 2px; text-transform: uppercase; margin-top: 2px; }
+
+  /* TIMELINE */
+  .tl { padding-left: 24px; border-left: 1px solid rgba(201,169,110,0.25); margin-top: 24px; }
+  .tl-s { margin-bottom: 20px; position: relative; }
+  .tl-d { position: absolute; left: -30px; top: 4px; width: 9px; height: 9px; border-radius: 50%; background: var(--ouro); border: 2px solid var(--preto); }
+  .tl-l { font-size: 9px; font-weight: 500; color: var(--ouro); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 3px; }
+  .tl-t { font-size: 13px; font-weight: 300; color: var(--creme); line-height: 1.5; }
+
+  /* ECOSSISTEMA */
+  .eco-box {
+    background: rgba(201,169,110,0.08); border: 1px solid rgba(201,169,110,0.2);
+    border-radius: 4px; padding: 24px 28px; margin-top: 24px;
+  }
+  .eco-text {
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 18px; color: var(--creme); line-height: 1.5; margin-bottom: 10px;
+  }
+  .eco-p { font-size: 13px; font-weight: 300; color: rgba(245,236,215,0.65); line-height: 1.65; }
+
+  /* NAVIGATION */
+  .nav {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 20px; padding: 0 4px;
+  }
+  .nav-btn {
+    background: rgba(201,169,110,0.1); border: 1px solid rgba(201,169,110,0.2);
+    color: var(--ouro); font-family: 'DM Sans', sans-serif;
+    font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase;
+    padding: 10px 24px; border-radius: 2px; cursor: pointer;
+    transition: background 0.2s;
+  }
+  .nav-btn:hover { background: rgba(201,169,110,0.2); }
+  .nav-btn:disabled { opacity: 0.3; cursor: default; }
+  .nav-counter { font-size: 11px; color: rgba(201,169,110,0.4); letter-spacing: 2px; }
+  .nav-dots { display: flex; gap: 6px; }
+  .nav-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(201,169,110,0.2); cursor: pointer; transition: background 0.2s; }
+  .nav-dot.active { background: var(--ouro); }
+
+  /* SLIDE ESPECIAL - CAPA */
+  .slide-capa { background: var(--terra); }
+  .slide-capa::before {
+    content: 'R.A.I.Z.';
+    position: absolute; right: -10px; top: 50%; transform: translateY(-50%);
+    font-family: 'Cormorant Garamond', serif; font-size: 140px; font-weight: 300;
+    color: rgba(201,169,110,0.04); pointer-events: none; letter-spacing: 10px;
+  }
+
+  /* SLIDE PREÇO - COR ESPECIAL */
+  .slide-preco { background: var(--terra); }
+
+  @media (max-width: 640px) {
+    .slide { padding: 40px 28px; min-height: 480px; }
+    h1 { font-size: 36px; } h2 { font-size: 28px; }
+    .grid-4, .pq-grid, .grid-2 { grid-template-columns: 1fr; }
+    .preco-big { font-size: 60px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="deck">
+
+  <!-- S1: CAPA -->
+  <div class="slide slide-capa active" data-slide="1">
+    <div class="slide-num">01 / 09</div>
+    <div class="slide-tag">Diagnóstico Exclusivo · Método R.A.I.Z. · Dra. Luana Rodrigues</div>
+    <h1>Mapa<br>R.A.I.Z.</h1>
+    <div class="sub">A primeira leitura real do seu sistema.<br>Feita para você. Entregue em até 72 horas.</div>
+    <div class="stats-row">
+      <div class="stat"><div class="stat-n">72h</div><div class="stat-l">Prazo de entrega</div></div>
+      <div class="stat"><div class="stat-n">4</div><div class="stat-l">Entregas incluídas</div></div>
+      
+    </div>
+  </div>
+
+  <!-- S2: DOR ESPELHO -->
+  <div class="slide" data-slide="2">
+    <div class="slide-num">02 / 09</div>
+    <div class="slide-tag">O que você está sentindo</div>
+    <h2>Você se<br><em>reconhece aqui?</em></h2>
+    <div class="dor-list">
+      <div class="dor-i"><div class="dor-dot"></div><div><div class="dor-text">"Meus exames estão normais, mas eu não estou bem."</div><div class="dor-nota">Sistema em alerta crônico. Ainda não colapso, mas já no limite.</div></div></div>
+      <div class="dor-i"><div class="dor-dot"></div><div><div class="dor-text">"Acordo cansada. O dia ainda nem começou."</div><div class="dor-nota">Sono que não recupera porque o sistema nervoso não desliga.</div></div></div>
+      <div class="dor-i"><div class="dor-dot"></div><div><div class="dor-text">"Já tentei de tudo. Nada conectou."</div><div class="dor-nota">Trataram o sintoma. Ninguém leu o sistema inteiro.</div></div></div>
+      <div class="dor-i"><div class="dor-dot"></div><div><div class="dor-text">"Não me reconheço mais. Virei só função."</div><div class="dor-nota">Identidade apagada por anos operando em modo sobrevivência.</div></div></div>
+    </div>
+  </div>
+
+  <!-- S3: O QUE ESTÁ ACONTECENDO -->
+  <div class="slide" data-slide="3">
+    <div class="slide-num">03 / 09</div>
+    <div class="slide-tag">A leitura real</div>
+    <h2>Isso não é cansaço.<br><em>É o sistema pedindo socorro.</em></h2>
+    <div class="quote">"Alta responsabilidade sem recuperação vira modo sobrevivência com maquiagem de produtividade."</div>
+    <p class="body">O que você tem não é falta de disciplina. É falta de base. Nenhum protocolo genérico resolve porque nenhum leu o seu sistema.</p>
+    <p class="body" style="color: var(--ouro);">Exames normais não significam que você está bem. Significam que o sistema ainda está aguentando. Por enquanto.</p>
+  </div>
+
+  <!-- S4: O PRODUTO -->
+  <div class="slide" data-slide="4">
+    <div class="slide-num">04 / 09</div>
+    <div class="slide-tag">O Mapa R.A.I.Z.</div>
+    <h2>O que é.<br><em>O que não é.</em></h2>
+    <div class="grid-2">
+      <div>
+        <div class="dor-nota" style="margin-bottom: 12px; font-size: 11px;">É</div>
+        <div class="pq-i"><span class="pi-dot">→</span><span>Diagnóstico personalizado com base nas suas respostas</span></div>
+        <div class="pq-i"><span class="pi-dot">→</span><span>Leitura do sistema completo pelo método R.A.I.Z.</span></div>
+        <div class="pq-i"><span class="pi-dot">→</span><span>Documento visual e áudio com a voz da Dra. Luana</span></div>
+        <div class="pq-i"><span class="pi-dot">→</span><span>Protocolo possível para a sua vida real</span></div>
+      </div>
+      <div>
+        <div class="dor-nota" style="margin-bottom: 12px; font-size: 11px; color: rgba(201,169,110,0.35);">Não é</div>
+        <div class="pq-i"><span style="color:rgba(201,169,110,0.3)">×</span><span>E-book com dicas genéricas</span></div>
+        <div class="pq-i"><span style="color:rgba(201,169,110,0.3)">×</span><span>Lista de suplementos sem contexto</span></div>
+        <div class="pq-i"><span style="color:rgba(201,169,110,0.3)">×</span><span>Consulta avulsa com orientações soltas</span></div>
+        <div class="pq-i"><span style="color:rgba(201,169,110,0.3)">×</span><span>Conteúdo que ignora a sua história</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S5: ENTREGAS -->
+  <div class="slide" data-slide="5">
+    <div class="slide-num">05 / 09</div>
+    <div class="slide-tag">4 entregas incluídas</div>
+    <h2>O que você<br><em>recebe</em></h2>
+    <div class="grid-4">
+      <div class="card-e">
+        <div class="card-e-num">1</div>
+        <div class="card-e-title">Formulário de Rastreamento</div>
+        <div class="card-e-desc">Anamnese profunda: rotina, história, sono, sistema nervoso. A matéria-prima do diagnóstico.</div>
+      </div>
+      <div class="card-e">
+        <div class="card-e-num">2</div>
+        <div class="card-e-title">Mapa R.A.I.Z. · PDF Personalizado</div>
+        <div class="card-e-desc">Leitura do sistema, 3 pilares prioritários e frase-diagnóstico proprietária.</div>
+      </div>
+      <div class="card-e">
+        <div class="card-e-num">3</div>
+        <div class="card-e-title">Protocolo dos 21 Dias</div>
+        <div class="card-e-desc">Uma ação por pilar. Orientações que cabem na vida real que você tem.</div>
+      </div>
+      <div class="card-e">
+        <div class="card-e-num">4</div>
+        <div class="card-e-title">Áudio Personalizado · Voz da Dra. Luana</div>
+        <div class="card-e-desc">5 a 8 minutos com o seu nome. A leitura do seu sistema em voz alta, pela primeira vez.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S6: COMO FUNCIONA -->
+  <div class="slide" data-slide="6">
+    <div class="slide-num">06 / 09</div>
+    <div class="slide-tag">Passo a passo</div>
+    <h2>Da compra<br>à <em>entrega</em></h2>
+    <div class="tl">
+      <div class="tl-s"><div class="tl-d"></div><div class="tl-l">Compra realizada</div><div class="tl-t">Formulário de rastreamento enviado por e-mail e WhatsApp imediatamente.</div></div>
+      <div class="tl-s"><div class="tl-d"></div><div class="tl-l">Formulário respondido</div><div class="tl-t">Dra. Luana analisa o sistema completo, produz o mapa, o protocolo e grava o áudio.</div></div>
+      <div class="tl-s"><div class="tl-d"></div><div class="tl-l">Entrega em até 72 horas</div><div class="tl-t">Mapa PDF + Protocolo PDF + Áudio enviados por e-mail e WhatsApp.</div></div>
+    </div>
+  </div>
+
+  <!-- S7: PARA QUEM -->
+  <div class="slide" data-slide="7">
+    <div class="slide-num">07 / 09</div>
+    <div class="slide-tag">Clareza antes da decisão</div>
+    <h2>Para quem é.<br><em>Para quem não é.</em></h2>
+    <div class="pq-grid">
+      <div class="pq-c s">
+        <div class="pq-ct">Para você se quer</div>
+        <div class="pq-i"><span class="pi-dot" style="color:var(--ouro)">·</span><span>Finalmente entender por que seus exames estão normais e você não está bem</span></div>
+        <div class="pq-i"><span class="pi-dot" style="color:var(--ouro)">·</span><span>Acordar com energia real, não só funcionar no piloto automático</span></div>
+        <div class="pq-i"><span class="pi-dot" style="color:var(--ouro)">·</span><span>Saber o que fazer primeiro, sem lista de 20 hábitos impossíveis</span></div>
+        <div class="pq-i"><span class="pi-dot" style="color:var(--ouro)">·</span><span>Parar de se trair: fazer o que cabe na vida real que você tem</span></div>
+        <div class="pq-i"><span class="pi-dot" style="color:var(--ouro)">·</span><span>Se reconhecer de novo, além da função que você virou</span></div>
+      </div>
+      <div class="pq-c">
+        <div class="pq-ct n">Não é para você se</div>
+        <div class="pq-i"><span style="color:rgba(201,169,110,0.3)">×</span><span>Quer uma lista de suplementos sem entender o sistema</span></div>
+        <div class="pq-i"><span style="color:rgba(201,169,110,0.3)">×</span><span>Está em crise aguda e precisa de suporte imediato</span></div>
+        <div class="pq-i"><span style="color:rgba(201,169,110,0.3)">×</span><span>Não tem disposição para preencher o formulário com atenção</span></div>
+        <div class="pq-i"><span style="color:rgba(201,169,110,0.3)">×</span><span>Quer validação para o que já decidiu fazer</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S8: ECOSSISTEMA / ÂNCORA -->
+  <div class="slide" data-slide="8">
+    <div class="slide-num">08 / 09</div>
+    <div class="slide-tag">Onde isso se encaixa</div>
+    <h2>O Mapa é<br><em>o primeiro movimento.</em></h2>
+    <p class="body">Não é um produto isolado. É a porta de entrada do método R.A.I.Z., desenhado para que você saia com clareza suficiente para decidir o próximo passo.</p>
+    <div class="eco-box">
+      <div class="eco-text">"O Mapa mostra onde você está. A Mentoria R.A.I.Z. é onde você percorre o caminho."</div>
+      <div class="eco-p">Os R$ 497 do Mapa são integralmente abatidos na Mentoria R.A.I.Z. se você decidir avançar em até 7 dias. Você não paga duas vezes pelo diagnóstico.</div>
+    </div>
+  </div>
+
+  <!-- S9: PREÇO / CTA -->
+  <div class="slide slide-preco" data-slide="9">
+    <div class="slide-num">09 / 09</div>
+    <div class="preco-center">
+      <div class="slide-tag" style="margin-bottom: 8px;">Investimento</div>
+      <div class="preco-big">R$ 497</div>
+      <div class="preco-tag">Pagamento único · Pix ou cartão</div>
+      <div class="preco-abate">Os R$ 497 são abatidos integralmente na Mentoria R.A.I.Z. em até 7 dias</div>
+      <br>
+      <a href="#" class="cta-btn">Quero o meu Mapa R.A.I.Z.</a>
+      <p class="body" style="margin-top: 18px; font-size: 12px; color: rgba(245,236,215,0.4);">Formulário enviado imediatamente após o pagamento.<br>Entrega em até 72h após formulário respondido.</p>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <div class="nav">
+    <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)" disabled>Anterior</button>
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
+      <div class="nav-counter" id="counter">01 / 09</div>
+      <div class="nav-dots" id="dots"></div>
+    </div>
+    <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Próximo</button>
+  </div>
+</div>
+
+<script>
+  let cur = 1;
+  const total = 9;
+  const dotsEl = document.getElementById('dots');
+
+  for (let i = 1; i <= total; i++) {
+    const d = document.createElement('div');
+    d.className = 'nav-dot' + (i === 1 ? ' active' : '');
+    d.onclick = () => goTo(i);
+    dotsEl.appendChild(d);
+  }
+
+  function goTo(n) {
+    document.querySelector('.slide.active').classList.remove('active');
+    cur = n;
+    document.querySelector(`[data-slide="${cur}"]`).classList.add('active');
+    document.getElementById('counter').textContent = String(cur).padStart(2,'0') + ' / ' + String(total).padStart(2,'0');
+    document.getElementById('prevBtn').disabled = cur === 1;
+    document.getElementById('nextBtn').disabled = cur === total;
+    document.querySelectorAll('.nav-dot').forEach((d, i) => d.classList.toggle('active', i + 1 === cur));
+  }
+
+  function changeSlide(dir) {
+    const next = cur + dir;
+    if (next < 1 || next > total) return;
+    goTo(next);
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') changeSlide(1);
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') changeSlide(-1);
+  });
+</script>
+</body>
+</html>
