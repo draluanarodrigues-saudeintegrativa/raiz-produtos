@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dra. Luana Rodrigues · Links</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --preto:    #1A1208;
+      --preto2:   #201508;
+      --ouro:     #C9A96E;
+      --ouro-cl:  #DFC28E;
+      --ouro-esc: #8B6E3C;
+      --creme:    #F5ECD7;
+    }
+
+    html, body {
+      min-height: 100%;
+      background: var(--preto);
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      color: var(--creme);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 56px 24px 72px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* fundo sutil */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 50% at 50% 0%, rgba(201,169,110,0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 50% 100%, rgba(201,169,110,0.04) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .page { width: 100%; max-width: 480px; position: relative; z-index: 1; }
+
+    /* FOTO */
+    .foto-wrap {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1.6rem;
+    }
+    .foto {
+      width: 108px;
+      height: 108px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center top;
+      border: 1.5px solid rgba(201,169,110,0.4);
+      display: block;
+    }
+    .foto-fallback {
+      width: 108px;
+      height: 108px;
+      border-radius: 50%;
+      background: rgba(201,169,110,0.07);
+      border: 1.5px solid rgba(201,169,110,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* NOME E TÍTULO */
+    .nome {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.9rem;
+      font-weight: 400;
+      color: var(--creme);
+      text-align: center;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+    .titulo {
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ouro);
+      text-align: center;
+      margin-bottom: 0.4rem;
+    }
+    .metodo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.95rem;
+      font-style: italic;
+      color: rgba(245,236,215,0.45);
+      text-align: center;
+      margin-bottom: 2.8rem;
+    }
+
+    /* DIVISOR */
+    .div-linha {
+      width: 36px;
+      height: 1.5px;
+      background: var(--ouro);
+      margin: 0 auto 2.8rem;
+      opacity: 0.6;
+    }
+
+    /* LINKS */
+    .links { display: flex; flex-direction: column; gap: 10px; width: 100%; }
+
+    .link-card {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 18px 22px;
+      border: 1px solid rgba(201,169,110,0.2);
+      background: rgba(32,21,8,0.6);
+      text-decoration: none;
+      color: var(--creme);
+      transition: border-color .2s, background .2s, transform .15s;
+      position: relative;
+      overflow: hidden;
+    }
+    .link-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(201,169,110,0.04) 0%, transparent 100%);
+      opacity: 0;
+      transition: opacity .2s;
+    }
+    .link-card:hover {
+      border-color: rgba(201,169,110,0.5);
+      background: rgba(201,169,110,0.06);
+      transform: translateY(-1px);
+    }
+    .link-card:hover::before { opacity: 1; }
+
+    /* card destaque (primeiro) */
+    .link-card.destaque {
+      border-color: rgba(201,169,110,0.45);
+      background: rgba(201,169,110,0.07);
+    }
+    .link-card.destaque:hover {
+      border-color: var(--ouro);
+      background: rgba(201,169,110,0.12);
+    }
+
+    .link-icon {
+      width: 38px;
+      height: 38px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(201,169,110,0.1);
+      border: 1px solid rgba(201,169,110,0.2);
+    }
+    .link-icon svg { width: 16px; height: 16px; stroke: var(--ouro); fill: none; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+
+    .link-txt { flex: 1; }
+    .link-titulo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 400;
+      color: var(--creme);
+      line-height: 1.2;
+      margin-bottom: 0.2rem;
+    }
+    .link-card.destaque .link-titulo { color: var(--ouro-cl); }
+    .link-desc {
+      font-size: 0.75rem;
+      color: rgba(245,236,215,0.48);
+      line-height: 1.4;
+      letter-spacing: 0.02em;
+    }
+
+    .link-arrow {
+      color: rgba(201,169,110,0.4);
+      font-size: 1rem;
+      flex-shrink: 0;
+      transition: transform .2s, color .2s;
+    }
+    .link-card:hover .link-arrow {
+      transform: translateX(3px);
+      color: var(--ouro);
+    }
+
+    /* CLUBE — card especial */
+    .link-card.clube {
+      border-color: rgba(201,169,110,0.15);
+      background: rgba(201,169,110,0.03);
+      position: relative;
+      overflow: hidden;
+    }
+    .link-card.clube::after {
+      content: '';
+      position: absolute;
+      top: -40%;
+      right: -20%;
+      width: 180px;
+      height: 180px;
+      background: radial-gradient(circle, rgba(201,169,110,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .link-card.clube:hover {
+      border-color: rgba(201,169,110,0.35);
+      background: rgba(201,169,110,0.06);
+    }
+    .clube-badge {
+      display: inline-block;
+      font-size: 0.58rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ouro-esc);
+      border: 1px solid rgba(139,110,60,0.35);
+      padding: 2px 8px;
+      margin-bottom: 0.3rem;
+    }
+    .link-card.clube .link-titulo { color: rgba(245,236,215,0.65); }
+    .link-card.clube .link-arrow { color: rgba(201,169,110,0.25); }
+    .link-card.clube:hover .link-arrow { color: rgba(201,169,110,0.5); }
+
+    /* RODAPÉ */
+    .rodape {
+      margin-top: 3.2rem;
+      text-align: center;
+    }
+    .rodape p {
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(139,110,60,0.5);
+    }
+    .rodape .raiz-marca {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.85rem;
+      font-style: italic;
+      color: rgba(201,169,110,0.3);
+      margin-top: 0.4rem;
+      letter-spacing: 0.06em;
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- FOTO -->
+  <div class="foto-wrap">
+    <img
+      class="foto"
+      src="https://draluanarodrigues-saudeintegrativa.github.io/raiz-produtos/foto-luana.jpg"
+      alt="Dra. Luana Rodrigues"
+      onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+    />
+    <div class="foto-fallback" style="display:none;">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="16" cy="11" r="6" stroke="#8B6E3C" stroke-width="0.9"/>
+        <path d="M3 32c0-7.18 5.82-13 13-13s13 5.82 13 13" stroke="#8B6E3C" stroke-width="0.9"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- IDENTIDADE -->
+  <p class="titulo">Saúde Integrativa · Neuroperformance</p>
+  <h1 class="nome">Dra. Luana Rodrigues</h1>
+  <p class="metodo">Método R.A.I.Z.</p>
+  <div class="div-linha"></div>
+
+  <!-- LINKS -->
+  <div class="links">
+
+    <!-- 1. Mapa R.A.I.Z -->
+    <a class="link-card destaque" href="https://draluanarodrigues-saudeintegrativa.github.io/raiz-produtos/mapa-raiz.html" target="_blank" rel="noopener">
+      <div class="link-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/></svg>
+      </div>
+      <div class="link-txt">
+        <p class="link-titulo">Mapa R.A.I.Z.</p>
+        <p class="link-desc">Diagnóstico completo do seu sistema · Entrega em 72h</p>
+      </div>
+      <span class="link-arrow">→</span>
+    </a>
+
+    <!-- 2. Consultoria Gratuita -->
+    <a class="link-card" href="https://docs.google.com/forms/d/e/1FAIpQLSen6xap2-HhENFn_yWojGk2pqfGmDrEvw_zK96kavuXlnJypg/viewform?usp=dialog" target="_blank" rel="noopener">
+      <div class="link-icon">
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <div class="link-txt">
+        <p class="link-titulo">Consultoria Gratuita R.A.I.Z.</p>
+        <p class="link-desc">Aplicação para a Mentoria · Vagas limitadas</p>
+      </div>
+      <span class="link-arrow">→</span>
+    </a>
+
+    <!-- 3. Palestras -->
+    <a class="link-card" href="https://wa.me/5511993558031?text=Olá%2C+tenho+interesse+em+contratar+uma+palestra+com+a+Dra.+Luana+Rodrigues." target="_blank" rel="noopener">
+      <div class="link-icon">
+        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      </div>
+      <div class="link-txt">
+        <p class="link-titulo">Palestras</p>
+        <p class="link-desc">Saúde integrativa para times e eventos corporativos</p>
+      </div>
+      <span class="link-arrow">→</span>
+    </a>
+
+    <!-- 4. Fale comigo -->
+    <a class="link-card" href="https://wa.me/message/Z2MEJXBFFKCTD1" target="_blank" rel="noopener">
+      <div class="link-icon">
+        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.42 2 2 0 0 1 3.6 1.24h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.82a16 16 0 0 0 6.13 6.13l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      </div>
+      <div class="link-txt">
+        <p class="link-titulo">Fale comigo</p>
+        <p class="link-desc">Para quem está pronta para o próximo passo</p>
+      </div>
+      <span class="link-arrow">→</span>
+    </a>
+
+    <!-- 5. Clube R.A.I.Z -->
+    <a class="link-card clube" href="https://wa.me/5511993558031?text=Quero+entrar+na+lista+de+espera+do+Clube+R.A.I.Z." target="_blank" rel="noopener">
+      <div class="link-icon" style="background:rgba(201,169,110,0.05);border-color:rgba(201,169,110,0.12);">
+        <svg viewBox="0 0 24 24" style="stroke:rgba(201,169,110,0.5)"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      </div>
+      <div class="link-txt">
+        <span class="clube-badge">Em breve</span>
+        <p class="link-titulo">Clube R.A.I.Z.</p>
+        <p class="link-desc">Seleto. Por convite. Entre na lista de espera.</p>
+      </div>
+      <span class="link-arrow">→</span>
+    </a>
+
+  </div>
+
+  <!-- RODAPÉ -->
+  <div class="rodape">
+    <p>Dra. Luana Rodrigues · CREFITO 230773-F</p>
+    <p class="raiz-marca">Método R.A.I.Z.</p>
+  </div>
+
+</div>
+</body>
+</html>
