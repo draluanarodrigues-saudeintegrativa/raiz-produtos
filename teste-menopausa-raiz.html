@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teste: Seu sistema está em modo sobrevivência na menopausa? | Dra. Luana Rodrigues</title>
+<meta name="description" content="Descubra qual eixo do seu sistema está mais comprometido na perimenopausa e menopausa. Teste gratuito baseado no Método R.A.I.Z.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--preto:#1A1208;--ouro:#C9A96E;--creme:#F5ECD7;--offwhite:#F9F5EE;--ouro-esc:#8B6E3C;--ouro-claro:#DFC28E;--terra:#3D2B0E}
+html{scroll-behavior:smooth}
+body{background:var(--preto);color:var(--creme);font-family:'DM Sans',sans-serif;font-weight:300;font-size:15px;line-height:1.8;min-height:100vh;-webkit-font-smoothing:antialiased}
+.wrap{max-width:520px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-family:'Cormorant Garamond',serif}
+h1{font-weight:300;font-size:clamp(26px,6vw,38px);line-height:1.25;color:var(--creme);margin-bottom:8px}
+h2{font-weight:300;font-size:clamp(22px,5vw,30px);line-height:1.3;color:var(--creme);margin-bottom:8px}
+.tag{font-family:'DM Sans',sans-serif;font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--ouro);font-weight:400;margin-bottom:14px;display:block}
+.sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:16px;color:var(--ouro);margin-bottom:24px}
+.hero{text-align:center;padding:60px 0 40px}
+.hero p{font-size:14px;opacity:0.8;max-width:400px;margin:0 auto 28px}
+.btn{font-family:'DM Sans',sans-serif;font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;padding:14px 32px;border-radius:2px;cursor:pointer;border:none;transition:all 0.25s ease;display:inline-block;text-decoration:none}
+.btn-pri{background:var(--ouro);color:var(--preto)}
+.btn-pri:hover{background:var(--ouro-claro)}
+.btn-out{background:transparent;border:1px solid rgba(201,169,110,0.3);color:var(--ouro)}
+.btn-out:hover{border-color:var(--ouro)}
+.btn:disabled{opacity:0.3;cursor:default}
+.btn-full{width:100%;text-align:center}
+.progress{height:2px;background:rgba(201,169,110,0.12);border-radius:1px;margin-bottom:24px}
+.progress-bar{height:2px;background:var(--ouro);border-radius:1px;transition:width 0.5s ease}
+.counter{font-size:11px;color:rgba(201,169,110,0.4);text-align:right;margin-bottom:6px}
+.sec{display:none}
+.sec.active{display:block}
+.q-text{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:19px;color:var(--creme);margin-bottom:20px;line-height:1.4}
+.opt{display:block;width:100%;text-align:left;background:transparent;border:1px solid rgba(201,169,110,0.18);border-radius:4px;padding:14px 16px;color:var(--creme);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:300;line-height:1.5;cursor:pointer;margin-bottom:10px;transition:all 0.2s ease}
+.opt:hover{border-color:var(--ouro);background:rgba(201,169,110,0.05)}
+.opt.sel{border-color:var(--ouro);background:rgba(201,169,110,0.1);color:var(--ouro)}
+.nav{display:flex;gap:10px;margin-top:20px}
+.nav .btn{flex:1;text-align:center}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--ouro);margin-bottom:6px;font-weight:400}
+.field input{width:100%;padding:12px 14px;background:rgba(201,169,110,0.06);border:1px solid rgba(201,169,110,0.2);border-radius:4px;color:var(--creme);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:300;outline:none;transition:border-color 0.2s}
+.field input::placeholder{color:rgba(245,236,215,0.3)}
+.field input:focus{border-color:var(--ouro)}
+.capture-note{font-size:11px;color:rgba(201,169,110,0.35);text-align:center;margin-top:12px}
+.axis-card{border:1px solid rgba(201,169,110,0.18);border-radius:4px;padding:16px;margin-bottom:12px}
+.axis-card.dominant{border-color:var(--ouro);background:rgba(201,169,110,0.06)}
+.axis-name{font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--ouro);margin-bottom:4px}
+.axis-desc{font-size:12px;color:var(--creme);opacity:0.7;margin-bottom:8px}
+.meter{height:4px;background:rgba(201,169,110,0.1);border-radius:2px}
+.meter-fill{height:4px;border-radius:2px;transition:width 0.8s ease}
+.meter-fill.high{background:var(--ouro)}
+.meter-fill.mid{background:rgba(201,169,110,0.45)}
+.meter-fill.low{background:rgba(201,169,110,0.2)}
+.route-box{border-top:1px solid rgba(201,169,110,0.2);padding-top:24px;margin-top:24px;text-align:center}
+.route-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:20px;color:var(--creme);margin-bottom:8px;line-height:1.3}
+.route-desc{font-size:13px;color:var(--creme);opacity:0.8;margin-bottom:20px;max-width:400px;margin-left:auto;margin-right:auto}
+.route-price{font-family:'Cormorant Garamond',serif;font-size:14px;color:var(--ouro);margin-bottom:16px}
+.route-alt{display:block;font-size:12px;color:rgba(201,169,110,0.5);margin-top:16px;text-decoration:none;cursor:pointer}
+.route-alt:hover{color:var(--ouro)}
+.restart{font-size:12px;color:rgba(201,169,110,0.3);cursor:pointer;text-align:center;margin-top:20px;border:none;background:none;font-family:'DM Sans',sans-serif;display:block;width:100%}
+.restart:hover{color:var(--ouro)}
+.div{width:60px;height:1px;background:var(--ouro);margin:0 auto 24px;opacity:0.4}
+footer{text-align:center;padding:40px 0 30px;font-size:12px;color:rgba(201,169,110,0.3)}
+.spinner{width:24px;height:24px;border:2px solid rgba(201,169,110,0.15);border-top-color:var(--ouro);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 16px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.trust{display:flex;gap:16px;justify-content:center;margin-top:32px;flex-wrap:wrap}
+.trust-item{font-size:11px;color:rgba(201,169,110,0.5);display:flex;align-items:center;gap:4px}
+.trust-item::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--ouro);opacity:0.4}
+</style>
+</head>
+<body>
+
+<section class="sec active" id="sec-intro">
+<div class="wrap">
+<div class="hero">
+<span class="tag">Teste gratuito</span>
+<h1>Seu corpo est&#225; em modo sobreviv&#234;ncia na menopausa?</h1>
+<div class="sub">10 perguntas para ler o que ningu&#233;m leu</div>
+<p>A maioria das mulheres na perimenopausa e menopausa trata sintoma por sintoma. Ginecologista, endocrinologista, nutricionista, suplemento, app de meditação. Cada um olha uma parte. Ninguém conecta o sistema.</p>
+<p>Este teste lê 4 eixos do seu sistema e mostra qual está mais comprometido agora. Em 3 minutos.</p>
+<button class="btn btn-pri" onclick="startQuiz()">Quero descobrir</button>
+<div class="trust">
+<span class="trust-item">Resultado personalizado</span>
+<span class="trust-item">Baseado no Método R.A.I.Z</span>
+<span class="trust-item">3 minutos</span>
+</div>
+</div>
+</div>
+</section>
+
+<section class="sec" id="sec-quiz">
+<div class="wrap" style="padding-top:40px;padding-bottom:40px">
+<div class="progress"><div class="progress-bar" id="bar"></div></div>
+<div class="counter" id="counter"></div>
+<div class="q-text" id="qtext"></div>
+<div id="opts"></div>
+<div class="nav">
+<button class="btn btn-out" id="prevBtn" onclick="prev()" disabled>Voltar</button>
+<button class="btn btn-pri" id="nextBtn" onclick="next()" disabled>Continuar</button>
+</div>
+</div>
+</section>
+
+<section class="sec" id="sec-capture">
+<div class="wrap" style="padding-top:40px;padding-bottom:40px">
+<div class="div"></div>
+<span class="tag" style="text-align:center;display:block">Seu resultado est&#225; pronto</span>
+<h2 style="text-align:center">Para onde envio a leitura dos seus eixos?</h2>
+<div class="sub" style="text-align:center">O resultado &#233; imediato. O nome e o WhatsApp s&#227;o para eu enviar o material complementar sobre o eixo que apareceu mais comprometido no seu teste.</div>
+<div class="field"><label>Seu nome</label><input type="text" id="inpNome" placeholder="Como você prefere ser chamada"></div>
+<div class="field"><label>Seu WhatsApp</label><input type="tel" id="inpWhats" placeholder="(00) 00000-0000"></div>
+<button class="btn btn-pri btn-full" onclick="submitCapture()">Ver meu resultado</button>
+<p class="capture-note">Seus dados est&#227;o seguros. N&#227;o envio spam.</p>
+</div>
+</section>
+
+<section class="sec" id="sec-loading">
+<div class="wrap" style="padding:80px 20px;text-align:center">
+<div class="spinner"></div>
+<p style="font-size:14px;color:var(--ouro)">Lendo seus eixos...</p>
+</div>
+</section>
+
+<section class="sec" id="sec-result">
+<div class="wrap" style="padding-top:40px;padding-bottom:20px">
+<div style="text-align:center;margin-bottom:24px">
+<span class="tag">Seu resultado</span>
+<h2 id="resTitle"></h2>
+</div>
+<p id="resBody" style="font-size:14px;opacity:0.85;margin-bottom:24px;text-align:center"></p>
+<div id="axisCards"></div>
+<div class="route-box" id="routeBox"></div>
+<button class="restart" onclick="restart()">Refazer teste</button>
+</div>
+</section>
+
+<footer><div class="wrap"><p>Dra. Luana Rodrigues &middot; Fisioterapeuta &middot; M&#233;todo R.A.I.Z</p><p style="margin-top:4px">Sa&#250;de Integrativa e Neuroperformance Feminina</p></div></footer>
+
+<script>
+var qs=[
+{q:"Como tem sido seu sono nos \u00faltimos 3 meses?",opts:[
+{t:"Acordo v\u00e1rias vezes e n\u00e3o consigo voltar a dormir",ax:"ne",v:3},
+{t:"Durmo, mas acordo como se n\u00e3o tivesse dormido",ax:"sn",v:3},
+{t:"Tenho dificuldade para pegar no sono, a mente n\u00e3o para",ax:"sn",v:2},
+{t:"Durmo razoavelmente bem na maioria das noites",ax:"ne",v:0}
+]},
+{q:"Quando voc\u00ea pensa na sua energia durante o dia, o que descreve melhor?",opts:[
+{t:"Oscila sem previsibilidade: dias bons, dias p\u00e9ssimos, sem padr\u00e3o",ax:"ne",v:3},
+{t:"Funciono de manh\u00e3, mas depois das 15h meu corpo desliga",ax:"ne",v:2},
+{t:"Cansa\u00e7o constante, mas for\u00e7o e fa\u00e7o tudo mesmo assim",ax:"sn",v:3},
+{t:"Tenho energia razo\u00e1vel na maior parte do tempo",ax:"ne",v:0}
+]},
+{q:"Como est\u00e1 sua concentra\u00e7\u00e3o e mem\u00f3ria?",opts:[
+{t:"N\u00e9voa mental: leio algo e n\u00e3o registro, esque\u00e7o o que ia fazer",ax:"ne",v:3},
+{t:"Demoro mais para concluir tarefas que antes fazia r\u00e1pido",ax:"ne",v:2},
+{t:"Sinto que minha cabe\u00e7a est\u00e1 mais lenta e isso me angustia",ax:"pn",v:3},
+{t:"Est\u00e1 normal, sem altera\u00e7\u00f5es percept\u00edveis",ax:"ne",v:0}
+]},
+{q:"O que acontece com suas emo\u00e7\u00f5es sem gatilho aparente?",opts:[
+{t:"Irritabilidade desproporcional, depois culpa por ter reagido assim",ax:"pn",v:3},
+{t:"Ansiedade que surge do nada, aperto no peito sem motivo",ax:"sn",v:3},
+{t:"Choro f\u00e1cil ou tristeza que n\u00e3o sei de onde vem",ax:"pn",v:2},
+{t:"Emo\u00e7\u00f5es dentro do esperado para a vida que tenho",ax:"pn",v:0}
+]},
+{q:"Sobre ondas de calor e sudorese:",opts:[
+{t:"Acordo encharcada \u00e0 noite, isso atrapalha meu sono",ax:"ne",v:3},
+{t:"Tenho fogachos durante o dia que atrapalham minha rotina",ax:"ne",v:2},
+{t:"Sinto calor, mas nada que altere muito meu funcionamento",ax:"ne",v:1},
+{t:"N\u00e3o tenho esse sintoma",ax:"ne",v:0}
+]},
+{q:"Como est\u00e1 sua rela\u00e7\u00e3o com comida e peso corporal?",opts:[
+{t:"Vontade compulsiva de carboidrato e doce, ganho peso sem explica\u00e7\u00e3o",ax:"ic",v:3},
+{t:"Como igual, mas meu corpo responde diferente: retenho, inflamo",ax:"ic",v:3},
+{t:"Intestino desregulado, incha\u00e7o frequente, digest\u00e3o lenta",ax:"ic",v:2},
+{t:"Alimenta\u00e7\u00e3o e peso est\u00e1veis",ax:"ic",v:0}
+]},
+{q:"Voc\u00ea j\u00e1 tentou resolver esses sintomas com profissionais?",opts:[
+{t:"Ginecologista, endocrinologista, nutricionista. Cada um olhou uma parte",ax:"sys",v:3},
+{t:"Suplementos, ch\u00e1s, apps de medita\u00e7\u00e3o, conte\u00fado da internet",ax:"sys",v:2},
+{t:"Reposi\u00e7\u00e3o hormonal que aliviou algo mas n\u00e3o resolveu tudo",ax:"sys",v:3},
+{t:"Ainda n\u00e3o busquei nada espec\u00edfico",ax:"sys",v:0}
+]},
+{q:"O que mais incomoda voc\u00ea nesse momento?",opts:[
+{t:"Perder a previsibilidade do meu pr\u00f3prio corpo",ax:"pn",v:3},
+{t:"N\u00e3o saber se \u00e9 menopausa, emocional ou estresse da vida",ax:"sys",v:3},
+{t:"Funcionar no limite e sentir que ningu\u00e9m percebe",ax:"pn",v:3},
+{t:"Um ou outro sintoma pontual, mas nada que me tire do eixo",ax:"pn",v:0}
+]},
+{q:"Como est\u00e1 sua capacidade de sustentar rotina e compromissos?",opts:[
+{t:"Come\u00e7o, n\u00e3o sustento. Falta energia para manter qualquer coisa",ax:"sn",v:3},
+{t:"Fa\u00e7o tudo, mas no piloto autom\u00e1tico, sem presen\u00e7a real",ax:"sn",v:3},
+{t:"Preciso de muito mais esfor\u00e7o para o que antes era simples",ax:"ne",v:2},
+{t:"Consigo manter minha rotina sem grandes dificuldades",ax:"sn",v:0}
+]},
+{q:"Se uma amiga te perguntasse como voc\u00ea est\u00e1 de verdade, o que diria?",opts:[
+{t:"Estou funcionando, mas por dentro n\u00e3o estou nada bem",ax:"pn",v:3},
+{t:"Tenho dias bons, mas nos ruins parece que vou desabar",ax:"sn",v:3},
+{t:"Estou tentando me adaptar, mas cansei de tentar sozinha",ax:"sys",v:3},
+{t:"Estou razoavelmente bem, com altos e baixos normais",ax:"pn",v:0}
+]}
+];
+
+var cur=0,ans=new Array(qs.length).fill(-1);
+var scores={ne:0,sn:0,ic:0,pn:0,sys:0};
+var leadData={};
+
+function show(id){document.querySelectorAll('.sec').forEach(function(s){s.classList.remove('active')});document.getElementById(id).classList.add('active');window.scrollTo({top:0,behavior:'smooth'})}
+function startQuiz(){show('sec-quiz');render()}
+function render(){var q=qs[cur];document.getElementById('bar').style.width=((cur+1)/qs.length*100)+'%';document.getElementById('counter').textContent=(cur+1)+' de '+qs.length;document.getElementById('qtext').textContent=q.q;var h='';for(var i=0;i<q.opts.length;i++){h+='<button class="opt'+(ans[cur]===i?' sel':'')+'" onclick="pick('+i+')">'+q.opts[i].t+'</button>'}document.getElementById('opts').innerHTML=h;document.getElementById('prevBtn').disabled=cur===0;document.getElementById('nextBtn').disabled=ans[cur]===-1;document.getElementById('nextBtn').textContent=cur===qs.length-1?'Finalizar':'Continuar'}
+function pick(i){ans[cur]=i;render()}
+function next(){if(ans[cur]===-1)return;if(cur<qs.length-1){cur++;render()}else{calcScores();show('sec-capture')}}
+function prev(){if(cur>0){cur--;render()}}
+function calcScores(){scores={ne:0,sn:0,ic:0,pn:0,sys:0};for(var i=0;i<qs.length;i++){var o=qs[i].opts[ans[i]];scores[o.ax]+=o.v}}
+
+function getRoute(){
+var total=scores.ne+scores.sn+scores.ic+scores.pn+scores.sys;
+var highCount=0;
+if(scores.ne>=5)highCount++;if(scores.sn>=5)highCount++;if(scores.ic>=5)highCount++;if(scores.pn>=5)highCount++;
+if(highCount>=3||total>=20)return'mapa';
+if((scores.sn>=scores.ic&&scores.sn>=scores.pn)||(scores.ne>=scores.ic&&scores.ne>=scores.pn)){if(total>=10)return'sono'}
+if(total>=15)return'mapa';if(total>=10)return'sono';
+return'conteudo';
+}
+
+function getDominantAxis(){
+var axes=[{k:'ne',s:scores.ne},{k:'sn',s:scores.sn},{k:'ic',s:scores.ic},{k:'pn',s:scores.pn}];
+axes.sort(function(a,b){return b.s-a.s});return axes[0].k;
+}
+
+document.addEventListener('DOMContentLoaded',function(){
+var inp=document.getElementById('inpWhats');
+if(inp){inp.addEventListener('input',function(){var v=this.value.replace(/\D/g,'');if(v.length<=2){this.value=v}else if(v.length<=7){this.value='('+v.substring(0,2)+') '+v.substring(2)}else if(v.length<=11){this.value='('+v.substring(0,2)+') '+v.substring(2,7)+'-'+v.substring(7)}else{this.value='('+v.substring(0,2)+') '+v.substring(2,7)+'-'+v.substring(7,11)}})}
+});
+
+function submitCapture(){
+var nome=document.getElementById('inpNome').value.trim();
+var whats=document.getElementById('inpWhats').value.trim();
+if(!nome||!whats){alert('Preencha seu nome e WhatsApp para ver o resultado.');return}
+if(whats.replace(/\D/g,'').length<10){alert('WhatsApp inv\u00e1lido. Verifique o n\u00famero.');return}
+var rota=getRoute();var dominante=getDominantAxis();var total=scores.ne+scores.sn+scores.ic+scores.pn+scores.sys;
+leadData={nome:nome,whatsapp:whats.replace(/\D/g,''),rota:rota,total:total,eixoDominante:dominante,scores:JSON.parse(JSON.stringify(scores)),timestamp:new Date().toISOString()};
+sendToSheet(leadData);
+show('sec-loading');setTimeout(function(){showResult(rota,dominante,total)},2000);
+}
+
+function sendToSheet(data){
+var SCRIPT_URL='https://script.google.com/macros/s/AKfycbw42PTbO7ZTqiEsVlWBJdAzQ4nLiSNWJJc_4Nk7R7ejEvEW2iGcizPbMnEZEtgqp56K/exec';
+if(SCRIPT_URL==='https://script.google.com/macros/s/AKfycbw42PTbO7ZTqiEsVlWBJdAzQ4nLiSNWJJc_4Nk7R7ejEvEW2iGcizPbMnEZEtgqp56K/exec'){console.log('Dados do lead:',JSON.stringify(data));return}
+fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify({nome:data.nome,whatsapp:data.whatsapp,rota:data.rota,total:data.total,eixoDominante:data.eixoDominante,ne:data.scores.ne,sn:data.scores.sn,ic:data.scores.ic,pn:data.scores.pn,sys:data.scores.sys,timestamp:data.timestamp})}).catch(function(e){console.log('Erro:',e)});
+}
+
+function showResult(rota,dominante,total){
+show('sec-result');
+var axisInfo={ne:{name:'Eixo neuroend\u00f3crino',desc:'Flutua\u00e7\u00e3o hormonal desregulando sono, energia, temperatura e cogni\u00e7\u00e3o. O decl\u00ednio estrog\u00eanico est\u00e1 acelerando o desgaste do eixo HPA.'},sn:{name:'Sistema nervoso aut\u00f4nomo',desc:'Corpo em alerta cr\u00f4nico que n\u00e3o consegue entrar em recupera\u00e7\u00e3o real. O parassimp\u00e1tico n\u00e3o ativa, o corpo n\u00e3o desliga.'},ic:{name:'Eixo intestino-c\u00e9rebro',desc:'Microbioma comprometido pela transi\u00e7\u00e3o hormonal, afetando humor, compuls\u00e3o alimentar e resposta inflamat\u00f3ria sist\u00eanmica.'},pn:{name:'Eixo psiconeuroimunol\u00f3gico',desc:'Identidade, emo\u00e7\u00f5es e imunidade sob press\u00e3o. O sistema imune e o sistema nervoso central est\u00e3o em alerta simult\u00e2neo.'}};
+var sev=total>=20?'alto':total>=12?'moderado':'leve';
+var titles={alto:'Seu sistema est\u00e1 operando em modo sobreviv\u00eancia',moderado:'Seu sistema est\u00e1 sinalizando desregula\u00e7\u00e3o ativa',leve:'Seu sistema mostra sinais iniciais de alerta'};
+var bodies={alto:'Os padr\u00f5es que voc\u00ea descreveu revelam um sistema nervoso que aprendeu a sobreviver e esqueceu como recuperar. A transi\u00e7\u00e3o hormonal est\u00e1 amplificando desregula\u00e7\u00f5es que provavelmente j\u00e1 existiam. N\u00e3o \u00e9 fraqueza. \u00c9 um corpo operando no limite h\u00e1 tempo demais.',moderado:'A transi\u00e7\u00e3o hormonal est\u00e1 come\u00e7ando a sobrecarregar eixos que antes seu corpo compensava sozinho. Este \u00e9 o ponto em que tratar sintomas isolados para de funcionar e a leitura do sistema se torna necess\u00e1ria.',leve:'Seu corpo est\u00e1 dando sinais iniciais de que a transi\u00e7\u00e3o hormonal come\u00e7a a afetar o funcionamento integrado. Este \u00e9 o momento de ler o sistema antes que a desregula\u00e7\u00e3o se consolide.'};
+document.getElementById('resTitle').textContent=titles[sev];
+document.getElementById('resBody').textContent=bodies[sev];
+var axes=[{k:'ne',s:scores.ne},{k:'sn',s:scores.sn},{k:'ic',s:scores.ic},{k:'pn',s:scores.pn}];
+axes.sort(function(a,b){return b.s-a.s});
+var h='';for(var i=0;i<axes.length;i++){var a=axes[i];var info=axisInfo[a.k];var pct=a.s>0?Math.min(Math.round(a.s/9*100),100):5;var lv=pct>=55?'high':pct>=25?'mid':'low';var isDom=i===0&&a.s>0;h+='<div class="axis-card'+(isDom?' dominant':'')+'"><div class="axis-name">'+(isDom?'\u25cf ':'')+info.name+'</div><div class="axis-desc">'+info.desc+'</div><div class="meter"><div class="meter-fill '+lv+'" style="width:'+pct+'%"></div></div></div>'}
+document.getElementById('axisCards').innerHTML=h;
+var r='';
+if(rota==='sono'){
+r+='<span class="tag">Pr\u00f3ximo passo recomendado para o seu padr\u00e3o</span>';
+r+='<div class="route-title">Protocolo Sono e Sistema Nervoso R.A.I.Z</div>';
+r+='<div class="route-desc">Seu teste aponta o sistema nervoso e o eixo neuroend\u00f3crino como os mais comprometidos. O sono \u00e9 o primeiro eixo a regular: uma noite regulada reconfigura o dia seguinte inteiro. Voc\u00ea responde um formul\u00e1rio de rastreamento, eu leio o seu padr\u00e3o de alerta noturno e entrego o protocolo personalizado com condu\u00e7\u00e3o em \u00e1udio na minha voz.</div>';
+r+='<div class="route-price">R$97 \u00b7 Entrega em at\u00e9 72h</div>';
+r+='<a href="https://sun.eduzz.com/Q9N2N86101" class="btn btn-pri btn-full" target="_blank">Quero regular meu sono</a>';
+r+='<a class="route-alt" href="#" onclick="showMapaAlt();return false">Ou conhe\u00e7a a leitura completa do sistema (Mapa R.A.I.Z)</a>';
+}else if(rota==='mapa'){
+r+='<span class="tag">Pr\u00f3ximo passo recomendado para o seu padr\u00e3o</span>';
+r+='<div class="route-title">Mapa R.A.I.Z</div>';
+r+='<div class="route-desc">Seu teste mostra mais de um eixo comprometido. Tratar uma parte n\u00e3o vai sustentar. O Mapa l\u00ea o sistema por inteiro: neuroend\u00f3crino, intestino-c\u00e9rebro, psiconeuroimunol\u00f3gico, rotina, hist\u00f3ria, padr\u00f5es. Voc\u00ea recebe o documento com a leitura completa do seu terreno, sem call, sem reuni\u00e3o.</div>';
+r+='<div class="route-price">R$497 \u00b7 Entrega personalizada</div>';
+r+='<a href="https://wa.me/5511993558031?text=Oi%20Dra.%20Luana%2C%20fiz%20o%20teste%20e%20quero%20saber%20mais%20sobre%20o%20Mapa%20R.A.I.Z" class="btn btn-pri btn-full" target="_blank">Quero o Mapa R.A.I.Z</a>';
+r+='<a class="route-alt" href="https://sun.eduzz.com/Q9N2N86101" target="_blank">Ou comece pelo Protocolo Sono (R$97)</a>';
+}else{
+r+='<span class="tag">Seu sistema ainda n\u00e3o est\u00e1 em alerta cr\u00edtico</span>';
+r+='<div class="route-title">Bom sinal. Mas fique atenta.</div>';
+r+='<div class="route-desc">Seu corpo ainda est\u00e1 compensando. Mas a transi\u00e7\u00e3o hormonal \u00e9 progressiva. Vou te enviar pelo WhatsApp conte\u00fado sobre como ler os sinais do seu sistema antes que a desregula\u00e7\u00e3o se instale.</div>';
+}
+document.getElementById('routeBox').innerHTML=r;
+}
+
+function showMapaAlt(){
+var rb=document.getElementById('routeBox');
+rb.innerHTML='<span class="tag">Leitura completa do sistema</span><div class="route-title">Mapa R.A.I.Z</div><div class="route-desc">Enquanto o Protocolo Sono regula um eixo, o Mapa l\u00ea o sistema por inteiro. Se voc\u00ea sente que o problema vai al\u00e9m do sono, o Mapa mostra a raiz completa da desregula\u00e7\u00e3o antes de qualquer interven\u00e7\u00e3o.</div><div class="route-price">R$497 \u00b7 Entrega personalizada</div><a href="https://wa.me/5511993558031?text=Oi%20Dra.%20Luana%2C%20fiz%20o%20teste%20e%20quero%20saber%20mais%20sobre%20o%20Mapa%20R.A.I.Z" class="btn btn-pri btn-full" target="_blank">Quero o Mapa R.A.I.Z</a><a class="route-alt" href="https://sun.eduzz.com/Q9N2N86101" target="_blank">Voltar ao Protocolo Sono (R$97)</a>';
+}
+
+function restart(){ans=new Array(qs.length).fill(-1);cur=0;scores={ne:0,sn:0,ic:0,pn:0,sys:0};show('sec-intro')}
+</script>
+</body>
+</html>
